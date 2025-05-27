@@ -68,9 +68,10 @@ body {
   }
 
   .photo img {
-    width: 450px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    width: 800px;
+    height: 600px;
+    border-radius: 0px;
+    margin-bottom: 0px;
   }
 
   .intro {
@@ -363,7 +364,8 @@ body {
   }
 
   .about-image img {
-    width: 300px;
+    width: 450px;
+    height: 500px;
     border-radius: 50%;
     border: 2px solid #f64da7;
   }
