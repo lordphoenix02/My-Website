@@ -410,3 +410,113 @@ body {
     line-height: 1.8;
     margin-bottom: 20px;
   }
+
+/* General Styles for Mobile */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+&nbsp;
+&nbsp;
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+&nbsp;
+&nbsp;
+
+    .hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+&nbsp;
+&nbsp;
+
+    .photo img {
+        width: 100%; /* Make image responsive */
+        height: auto; /* Maintain aspect ratio */
+    }
+&nbsp;
+&nbsp;
+
+    .intro {
+        text-align: center;
+        padding: 0 10px;
+    }
+&nbsp;
+&nbsp;
+
+    .contact-section {
+        padding: 20px 10px;
+    }
+&nbsp;
+&nbsp;
+
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+&nbsp;
+&nbsp;
+
+    .about-image img {
+        width: 80%; /* Make image responsive */
+        height: auto; /* Maintain aspect ratio */
+    }
+&nbsp;
+&nbsp;
+
+    .project-card {
+        max-width: 90%; /* Allow project cards to take more width */
+    }
+&nbsp;
+&nbsp;
+
+    .footer-socials {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.hamburger {
+    display: none; /* Hide by default */
+    flex-direction: column;
+    cursor: pointer;
+}
+&nbsp;
+&nbsp;
+
+.bar {
+    height: 3px;
+    width: 25px;
+    background-color: #ff9fd2;
+    margin: 3px 0;
+}
+&nbsp;
+&nbsp;
+
+/* Show hamburger on mobile */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex; /* Show on mobile */
+    }
+&nbsp;
+&nbsp;
+
+    .nav-links {
+        display: none; /* Hide links initially */
+        flex-direction: column;
+    }
+&nbsp;
+&nbsp;
+
+    .nav-links.active {
+        display: flex; /* Show links when active */
+    }
+}
