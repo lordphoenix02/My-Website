@@ -481,10 +481,15 @@ body {
        flex-wrap: wrap;
        gap: 15px;
     }
+    .footer-socials a i {
+    font-size: 2rem;
+  }
+
 }
 
 .hamburger {
     display: none; /* Hide by default */
+    margin-left: auto;
     flex-direction: column;
     cursor: pointer;
 }
