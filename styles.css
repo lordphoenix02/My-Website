@@ -421,7 +421,7 @@ body {
 /* General Styles for Mobile */
 @media (max-width: 768px) {
     nav {
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         padding: 10px;
     }
