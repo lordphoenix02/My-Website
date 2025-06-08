@@ -11,7 +11,8 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 20px 60px;
+  overflow: visible;
+  padding: 20px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,14 +27,15 @@ body {
 
   .logo {
     color: #ff9fd2;
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: bold;
   }
 
   .nav-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 25px;
+    justify-content: center; 
+    gap: 5px;
   }
 
   .nav-links a {
@@ -41,7 +43,8 @@ body {
     color: #ff9fd2;
     text-decoration: none;
     padding-bottom: 4px;
-    font-size: 20px;
+    padding-right: 50px;
+    font-size: 25px;
     font-weight: bold;
   }
 
