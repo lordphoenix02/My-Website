@@ -23,7 +23,9 @@ body {
   );
   z-index: 1000;
   transition: background-color 0.3s;
+   background-color: #141414;
   }
+
 
   .logo {
     color: #ff9fd2;
