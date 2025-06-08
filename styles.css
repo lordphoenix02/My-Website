@@ -492,6 +492,7 @@ body {
     margin-left: auto;
     flex-direction: column;
     cursor: pointer;
+    padding-right: 10px;
 }
 
 
@@ -510,8 +511,7 @@ body {
     }
 
     .logo {
-      margin-right: auto;
-      padding-right: 10px;
+     display: none;
     }
 
 
