@@ -510,6 +510,10 @@ body {
         display: flex; /* Show on mobile */
     }
 
+    .logo {
+      margin-right: auto;
+    }
+
 
     .nav-links {
         display: none; /* Hide links initially */
