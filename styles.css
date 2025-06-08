@@ -475,8 +475,11 @@ body {
 
 
     .footer-socials {
-        flex-direction: column;
-        gap: 10px;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-evenly;
+       flex-wrap: wrap;
+       gap: 15px;
     }
 }
 
