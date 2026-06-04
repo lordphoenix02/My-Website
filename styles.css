@@ -197,28 +197,13 @@ body {
     animation: tileDrift 7.4s ease-in-out 0.7s infinite reverse;
   }
 
-  .stat-tile {
+  .tile-three {
+    width: 174px;
+    height: 112px;
     right: 0;
-    bottom: 18%;
-    min-width: 96px;
-    padding: 12px 14px;
-    color: var(--paper);
-    background: var(--ink);
+    bottom: 15%;
+    object-fit: cover;
     animation: tileDriftSmall 5.8s ease-in-out 0.2s infinite;
-  }
-
-  .stat-tile span {
-    display: block;
-    color: var(--pink);
-    font-weight: 700;
-    font-size: 0.92rem;
-  }
-
-  .stat-tile strong {
-    display: block;
-    font-size: 1.55rem;
-    line-height: 1;
-    margin-top: 4px;
   }
 
   .data-mark {
@@ -242,14 +227,6 @@ body {
     max-width: none;
     text-align: center;
     padding: 0 35px;
-  }
-
-  .eyebrow {
-    display: inline-block;
-    margin-bottom: 10px;
-    color: var(--muted);
-    font-weight: 700;
-    animation: introRise 0.65s ease both;
   }
 
   .intro h1 {
@@ -364,9 +341,11 @@ body {
       left: 0;
     }
 
-    .stat-tile {
-      min-width: 80px;
-      padding: 10px 12px;
+    .tile-three {
+      width: 118px;
+      height: 82px;
+      right: 0;
+      bottom: 16%;
     }
   }
 
