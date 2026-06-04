@@ -66,25 +66,40 @@ body {
   }
 
   .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    min-height: 85vh;
+    padding: 50px 70px;
+    box-sizing: border-box;
+  }
+
+  .photo,
+  .intro {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .photo {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 50px 30px;
-    flex-wrap: wrap;
-    min-height: 85vh;
   }
 
   .photo img {
-    width: 800px;
-    height: 600px;
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 140px);
+    object-fit: contain;
     border-radius: 0px;
     margin-bottom: 0px;
   }
 
   .intro {
-    max-width: 600px;
-    text-align: right;
-    padding: 0 15px;
+    max-width: none;
+    text-align: center;
+    padding: 0 35px;
   }
 
   .intro h1 {
@@ -137,7 +152,7 @@ body {
 
   @media (max-width: 768px) {
     .hero {
-      flex-direction: column;
+      grid-template-columns: 1fr;
       align-items: center;
       text-align: center;
     }
@@ -148,7 +163,7 @@ body {
     }
 
     .photo img {
-      width: 200px;
+      width: min(100%, 320px);
     }
 
     .intro {
@@ -434,7 +449,7 @@ body {
 
 
     .hero {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         align-items: center;
         text-align: center;
         padding: 20px;
@@ -442,7 +457,7 @@ body {
 
 
     .photo img {
-        width: 100%; /* Make image responsive */
+        width: min(100%, 320px); /* Make image responsive */
         height: auto; /* Maintain aspect ratio */
     }
 
