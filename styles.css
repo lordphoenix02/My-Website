@@ -92,6 +92,9 @@ body {
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.7)), url("home-bg-frame0.png");
+    background-position: center;
+    background-size: cover;
   }
 
   .hero::before {
