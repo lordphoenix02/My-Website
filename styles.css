@@ -282,10 +282,10 @@ body[data-theme="dark"]::before {
   }
 
   .tile-one {
-    width: 108px;
-    height: 138px;
-    right: 4%;
-    top: 5%;
+    width: 178px;
+    height: 124px;
+    right: 1%;
+    top: 6%;
     object-fit: cover;
     animation: tileDrift 6s ease-in-out infinite;
   }
@@ -432,9 +432,9 @@ body[data-theme="dark"]::before {
     }
 
     .tile-one {
-      width: 76px;
-      height: 96px;
-      right: 0;
+      width: 132px;
+      height: 92px;
+      right: -2%;
     }
 
     .tile-two {
