@@ -11,18 +11,24 @@
 
   <nav>
     <div class="logo">Anandita~</div>
-    <div class="hamburger" onclick="toggleMenu()">
-     <div class="bar"></div>
-     <div class="bar"></div>
-     <div class="bar"></div>
-   </div>
-    <div class="nav-links">
+    <div class="nav-links" id="primary-navigation">
       <a href="#home">HOME</a>
       <a href="#about">ABOUT</a>
       <a href="#projects">PROJECTS</a>
       <a href="#certifications">CERTIFICATIONS</a>
       <a href="#notes">NOTE</a>
       <a href="#contact">CONTACT</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <i class="fa-solid fa-moon"></i>
+        <span>Dark</span>
+      </button>
+      <button class="hamburger" type="button" onclick="toggleMenu()" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
   </nav>
 
@@ -69,7 +75,7 @@
       </ul>
     </div>
     <div class="about-image" data-reveal>
-      <img src="ph4.jpg" alt="Anandita Portrait" />
+      <img src="bookstore-about.jpeg" alt="Anandita browsing books" />
     </div>
   </div>
 </section>

@@ -3,8 +3,36 @@ document.documentElement.classList.add('js');
 // Add this JavaScript to toggle the menu
 function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
     navLinks.classList.toggle('active');
+    hamburger?.setAttribute('aria-expanded', navLinks.classList.contains('active').toString());
 }
+
+const themeToggle = document.querySelector('.theme-toggle');
+const themeIcon = themeToggle?.querySelector('i');
+const themeLabel = themeToggle?.querySelector('span');
+
+function applyTheme(theme) {
+    const isDark = theme === 'dark';
+
+    document.body.dataset.theme = isDark ? 'dark' : 'light';
+    themeToggle?.setAttribute('aria-pressed', isDark.toString());
+    themeToggle?.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+
+    if (themeIcon && themeLabel) {
+        themeIcon.className = `fa-solid ${isDark ? 'fa-sun' : 'fa-moon'}`;
+        themeLabel.textContent = isDark ? 'Light' : 'Dark';
+    }
+}
+
+const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+applyTheme(savedTheme);
+
+themeToggle?.addEventListener('click', () => {
+    const nextTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('portfolio-theme', nextTheme);
+    applyTheme(nextTheme);
+});
 
 const revealItems = document.querySelectorAll('[data-reveal]');
 const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -43,6 +71,7 @@ if (photoStage) {
 document.querySelectorAll('.nav-links a').forEach((link) => {
     link.addEventListener('click', () => {
         document.querySelector('.nav-links').classList.remove('active');
+        document.querySelector('.hamburger')?.setAttribute('aria-expanded', 'false');
     });
 });
 
