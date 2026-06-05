@@ -45,3 +45,19 @@ document.querySelectorAll('.nav-links a').forEach((link) => {
         document.querySelector('.nav-links').classList.remove('active');
     });
 });
+
+document.querySelectorAll('.project-card, .certification-item').forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
+        const bounds = card.getBoundingClientRect();
+        const x = ((event.clientX - bounds.left) / bounds.width * 100).toFixed(2);
+        const y = ((event.clientY - bounds.top) / bounds.height * 100).toFixed(2);
+
+        card.style.setProperty('--glow-x', `${x}%`);
+        card.style.setProperty('--glow-y', `${y}%`);
+    });
+
+    card.addEventListener('pointerleave', () => {
+        card.style.removeProperty('--glow-x');
+        card.style.removeProperty('--glow-y');
+    });
+});
