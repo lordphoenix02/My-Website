@@ -434,7 +434,8 @@ body[data-theme="dark"]::before {
     .tile-one {
       width: 132px;
       height: 92px;
-      right: -2%;
+      right: -4%;
+      top: -8%;
     }
 
     .tile-two {
@@ -919,31 +920,24 @@ body[data-theme="dark"]::before {
     justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
-    max-width: 1100px;
+    max-width: 1180px;
     margin: 0 auto;
   }
 
   .about-text {
     position: relative;
-    max-width: 600px;
-    padding: 30px;
+    max-width: 640px;
+    padding: 8px 12px;
     color: var(--scrap-brown);
-    background: rgba(255, 248, 239, 0.88);
-    border: 1px solid rgba(75, 45, 36, 0.2);
-    border-radius: 8px;
-    box-shadow: 0 22px 58px rgba(75, 45, 36, 0.14);
-    transform: rotate(-0.7deg);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
   }
 
   .about-text::before {
-    content: "";
-    position: absolute;
-    right: 28px;
-    top: -14px;
-    width: 128px;
-    height: 28px;
-    background: var(--scrap-tape);
-    transform: rotate(3deg);
+    content: none;
   }
 
   .about-text h2 {
@@ -1147,7 +1141,6 @@ body[data-theme="dark"] .about-section::after {
     color: rgba(255, 248, 239, 0.08);
   }
 
-body[data-theme="dark"] .about-text,
 body[data-theme="dark"] .contact-container {
     background: rgba(38, 29, 26, 0.9);
     border-color: rgba(255, 248, 239, 0.14);
@@ -1431,7 +1424,7 @@ body[data-theme="dark"] .contact-section textarea::placeholder {
   }
 
 .about-text[data-reveal] {
-    --settled-rotate: -0.7deg;
+    --settled-rotate: 0deg;
   }
 
 .contact-container[data-reveal] {
