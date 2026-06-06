@@ -90,3 +90,82 @@ document.querySelectorAll('.project-card, .certification-item').forEach((card) =
         card.style.removeProperty('--glow-y');
     });
 });
+
+const mysteryShapes = document.querySelectorAll('.mystery-shape');
+const mysteryMusic = document.querySelector('#mysteryMusic');
+let mysteryAudioContext;
+
+function playFallbackMysteryTone(toneIndex) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContext) {
+        return;
+    }
+
+    mysteryAudioContext ||= new AudioContext();
+
+    if (mysteryAudioContext.state === 'suspended') {
+        mysteryAudioContext.resume();
+    }
+
+    const startTime = mysteryAudioContext.currentTime;
+    const notes = [
+        [196, 261.63, 311.13],
+        [220, 293.66, 349.23],
+        [174.61, 233.08, 329.63],
+        [246.94, 329.63, 392]
+    ][toneIndex] || [196, 261.63, 311.13];
+
+    notes.forEach((frequency, index) => {
+        const oscillator = mysteryAudioContext.createOscillator();
+        const gain = mysteryAudioContext.createGain();
+        const noteStart = startTime + index * 0.12;
+
+        oscillator.type = index === 1 ? 'triangle' : 'sine';
+        oscillator.frequency.setValueAtTime(frequency, noteStart);
+        oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.01, noteStart + 0.38);
+
+        gain.gain.setValueAtTime(0.0001, noteStart);
+        gain.gain.exponentialRampToValueAtTime(0.13, noteStart + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.0001, noteStart + 0.42);
+
+        oscillator.connect(gain);
+        gain.connect(mysteryAudioContext.destination);
+        oscillator.start(noteStart);
+        oscillator.stop(noteStart + 0.44);
+    });
+}
+
+async function playMysterySound(shape) {
+    const toneIndex = Number(shape.dataset.tone || 0);
+
+    shape.classList.remove('is-active');
+    void shape.offsetWidth;
+    shape.classList.add('is-active');
+    document.body.classList.add('mystery-is-playing');
+
+    window.setTimeout(() => {
+        shape.classList.remove('is-active');
+        document.body.classList.remove('mystery-is-playing');
+    }, 1100);
+
+    if (mysteryMusic?.dataset.src) {
+        mysteryMusic.src ||= mysteryMusic.dataset.src;
+        mysteryMusic.volume = 0.46;
+        mysteryMusic.currentTime = 0;
+
+        try {
+            await mysteryMusic.play();
+            return;
+        } catch {
+            playFallbackMysteryTone(toneIndex);
+            return;
+        }
+    }
+
+    playFallbackMysteryTone(toneIndex);
+}
+
+mysteryShapes.forEach((shape) => {
+    shape.addEventListener('click', () => playMysterySound(shape));
+});
