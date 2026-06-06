@@ -91,6 +91,27 @@ document.querySelectorAll('.project-card, .certification-item').forEach((card) =
     });
 });
 
+const projectCards = document.querySelectorAll('.project-card');
+
+function pickProjectCard(activeCard) {
+    projectCards.forEach((card) => card.classList.toggle('is-picked', card === activeCard));
+}
+
+projectCards.forEach((card) => {
+    card.addEventListener('pointerenter', () => pickProjectCard(card));
+    card.addEventListener('focusin', () => pickProjectCard(card));
+    card.addEventListener('pointerleave', () => {
+        if (!card.matches(':focus-within')) {
+            card.classList.remove('is-picked');
+        }
+    });
+    card.addEventListener('click', (event) => {
+        if (!event.target.closest('a')) {
+            pickProjectCard(card);
+        }
+    });
+});
+
 const photoMusicButtons = document.querySelectorAll('.photo-music-toggle');
 const mysteryMusic = document.querySelector('#mysteryMusic');
 let mysteryAudioContext;

@@ -715,131 +715,360 @@ body[data-theme="dark"]::before {
   /* Project Section */
   .projects-section {
     background:
-      linear-gradient(145deg, rgba(246, 234, 220, 0.94), rgba(255, 248, 239, 0.86)),
-      repeating-linear-gradient(90deg, transparent 0 42px, rgba(159, 46, 47, 0.05) 43px 44px);
+      radial-gradient(circle at 12% 18%, rgba(255, 81, 174, 0.14), transparent 18%),
+      radial-gradient(circle at 86% 24%, rgba(35, 55, 78, 0.18), transparent 16%),
+      linear-gradient(145deg, rgba(237, 183, 91, 0.84), rgba(255, 248, 239, 0.78)),
+      repeating-linear-gradient(0deg, rgba(75, 45, 36, 0.055) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(90deg, rgba(75, 45, 36, 0.045) 0 1px, transparent 1px 24px);
     padding: 72px 20px;
     text-align: center;
-     min-height: 75vh;
+    min-height: 75vh;
   }
 
   .projects-section::after {
-    content: "WORK FILES";
+    content: "WORK\A FILES";
     position: absolute;
-    right: clamp(18px, 6vw, 92px);
-    top: 92px;
-    color: rgba(159, 46, 47, 0.24);
-    font-size: clamp(2.4rem, 8vw, 7rem);
+    left: clamp(18px, 5vw, 76px);
+    top: 112px;
+    color: rgba(255, 248, 239, 0.28);
+    font-size: clamp(3.4rem, 10vw, 8.8rem);
     font-weight: 900;
-    transform: rotate(6deg);
+    line-height: 0.82;
+    white-space: pre;
+    transform: rotate(-7deg);
     pointer-events: none;
   }
 
   .projects-section h2 {
     color: var(--scrap-red);
     font-size: 2.6em;
-    margin-bottom: 54px;
+    margin-bottom: 62px;
   }
 
   .projects-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 34px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    align-items: end;
+    gap: clamp(20px, 3vw, 36px);
+    width: min(100%, 1060px);
+    margin: 0 auto;
     counter-reset: project;
+    perspective: 1100px;
   }
 
   .project-card {
     counter-increment: project;
+    --card-rotate: -1deg;
+    --picked-lift: 0px;
+    --picked-scale: 1;
+    --picked-rotate: var(--card-rotate);
+    --file: #26394b;
+    --tab: #f0c165;
+    --back-file: rgba(255, 248, 239, 0.86);
+    --project-title: #f0c165;
+    --project-body: rgba(255, 248, 239, 0.88);
+    --project-link-bg: #9f2e2f;
+    --project-link-text: #fff8ef;
     position: relative;
-    overflow: hidden;
-    background-color: rgba(255, 248, 239, 0.94);
-    background-image:
-      radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(217, 165, 91, 0.28), transparent 34%),
-      linear-gradient(transparent 0 31px, rgba(75, 45, 36, 0.055) 32px),
-      linear-gradient(90deg, rgba(159, 46, 47, 0.08) 0 1px, transparent 1px);
-    background-size: 100% 32px, 32px 100%;
-    border: 1px solid rgba(75, 45, 36, 0.28);
-    border-radius: 8px;
-    padding: 26px 22px 22px;
-    max-width: 300px;
-    min-height: 238px;
+    z-index: 1;
+    min-height: 306px;
+    overflow: visible;
+    color: var(--project-body);
+    background: transparent;
+    border: 0;
+    border-radius: 16px;
+    padding: 0;
     text-align: left;
-    box-shadow: 0 20px 50px rgba(75, 45, 36, 0.14);
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    box-shadow: none;
+    transform: translateY(var(--picked-lift)) rotate(var(--picked-rotate)) scale(var(--picked-scale));
+    transition: transform 0.45s cubic-bezier(0.18, 0.9, 0.24, 1), z-index 0.2s ease;
+    isolation: isolate;
   }
 
   .project-card:nth-child(1) {
-    transform: rotate(-1.1deg);
+    --card-rotate: -1.4deg;
+    --settled-rotate: -1.4deg;
+    z-index: 2;
   }
 
   .project-card:nth-child(2) {
-    transform: rotate(0.8deg);
+    --card-rotate: 1.2deg;
+    --file: #dfe6c9;
+    --tab: #82906f;
+    --back-file: rgba(38, 57, 75, 0.86);
+    --project-title: #9f2e2f;
+    --project-body: #3b2d29;
+    --project-link-bg: #26394b;
+    --project-link-text: #fff8ef;
+    --settled-rotate: 1.2deg;
+    z-index: 3;
+    margin-top: 38px;
   }
 
   .project-card:nth-child(3) {
-    transform: rotate(-0.4deg);
+    --card-rotate: -0.6deg;
+    --file: #fff8ef;
+    --tab: #b7594e;
+    --back-file: rgba(217, 165, 91, 0.66);
+    --project-title: #26394b;
+    --project-body: #3b2d29;
+    --project-link-bg: #ff9fd2;
+    --project-link-text: #171717;
+    --settled-rotate: -0.6deg;
+    z-index: 1;
+    margin-top: 76px;
   }
 
   .project-card::before {
     content: "";
     position: absolute;
-    left: 50%;
-    top: -16px;
-    width: 122px;
-    height: 32px;
-    background: var(--scrap-tape);
-    transform: translateX(-50%) rotate(-2deg);
-    box-shadow: 0 8px 18px rgba(75, 45, 36, 0.08);
-    transition: transform 0.35s ease;
+    inset: 18px 12px 22px 26px;
+    z-index: 0;
+    background:
+      linear-gradient(transparent 0 31px, rgba(75, 45, 36, 0.045) 32px),
+      var(--back-file);
+    border: 1px solid rgba(75, 45, 36, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 18px 38px rgba(75, 45, 36, 0.16);
+    transform: translate3d(18px, -30px, -20px) rotate(1.8deg);
+    transition: transform 0.45s cubic-bezier(0.18, 0.9, 0.24, 1), box-shadow 0.35s ease;
   }
 
   .project-card::after {
     content: "0" counter(project);
     position: absolute;
-    right: 18px;
-    bottom: 14px;
-    color: rgba(159, 46, 47, 0.16);
-    font-size: 4.2rem;
+    right: 20px;
+    bottom: 24px;
+    z-index: 3;
+    color: rgba(255, 248, 239, 0.14);
+    font-size: 4.8rem;
     font-weight: 900;
     line-height: 1;
+    pointer-events: none;
+    transition: color 0.3s ease, transform 0.35s ease;
   }
 
-  .project-card:hover {
-    transform: translateY(-14px) rotate(-1.5deg) scale(1.02);
-    border-color: var(--scrap-red);
-    box-shadow: 0 28px 70px rgba(75, 45, 36, 0.2);
+  .project-card:nth-child(2)::after,
+  .project-card:nth-child(3)::after {
+    color: rgba(159, 46, 47, 0.13);
   }
 
-  .project-card:hover::before {
-    transform: translateX(-50%) rotate(3deg) translateY(2px);
+  .project-card:hover,
+  .project-card:focus-within,
+  .project-card.is-picked {
+    --picked-lift: -22px;
+    --picked-scale: 1.035;
+    --picked-rotate: 0deg;
+    z-index: 8;
+  }
+
+  .project-card:hover::before,
+  .project-card:focus-within::before,
+  .project-card.is-picked::before {
+    box-shadow: 0 24px 52px rgba(75, 45, 36, 0.2);
+    transform: translate3d(28px, -52px, -20px) rotate(3deg);
+  }
+
+  .project-card:hover::after,
+  .project-card:focus-within::after,
+  .project-card.is-picked::after {
+    transform: translateY(-8px);
+  }
+
+  .project-tab {
+    position: absolute;
+    left: 18px;
+    top: 0;
+    z-index: 2;
+    min-width: 58%;
+    max-width: calc(100% - 44px);
+    padding: 13px 20px 17px;
+    color: #fff8ef;
+    background: var(--tab);
+    border: 1px solid rgba(75, 45, 36, 0.24);
+    border-bottom: 0;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 10px 24px rgba(75, 45, 36, 0.12);
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .project-card:nth-child(1) .project-tab,
+  .project-card:nth-child(3) .project-tab {
+    color: var(--scrap-paper);
+  }
+
+  .project-card:nth-child(2) .project-tab {
+    color: #fff8ef;
+  }
+
+  .project-file-face {
+    position: relative;
+    z-index: 2;
+    min-height: 292px;
+    margin-top: 43px;
+    padding: 28px 24px 70px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(255, 248, 239, 0.2), transparent 36%),
+      linear-gradient(transparent 0 31px, rgba(255, 248, 239, 0.05) 32px),
+      var(--file);
+    background-size: 100% auto, 100% 32px, auto;
+    border: 1px solid rgba(75, 45, 36, 0.26);
+    border-radius: 0 16px 16px 16px;
+    box-shadow: 0 24px 64px rgba(75, 45, 36, 0.2);
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+
+  .project-file-face::before {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(255, 248, 239, 0.14);
+    border-radius: 10px;
+    pointer-events: none;
+  }
+
+  .project-card:hover .project-tab,
+  .project-card:focus-within .project-tab,
+  .project-card.is-picked .project-tab {
+    box-shadow: 0 16px 32px rgba(75, 45, 36, 0.18);
+    transform: translateY(-12px);
+  }
+
+  .project-card:hover .project-file-face,
+  .project-card:focus-within .project-file-face,
+  .project-card.is-picked .project-file-face {
+    border-color: rgba(255, 81, 174, 0.44);
+    box-shadow: 0 32px 82px rgba(75, 45, 36, 0.27);
+  }
+
+  .project-file-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 8px 12px;
+    color: var(--project-link-text);
+    background: var(--project-link-bg);
+    border-radius: 999px;
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.12);
+    font-size: 0.75rem;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
   }
 
   .project-card h3 {
     position: relative;
-    color: var(--scrap-red);
-    margin-bottom: 10px;
-    padding-top: 8px;
+    color: var(--project-title);
+    margin-bottom: 12px;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    line-height: 1.02;
+    text-transform: uppercase;
   }
 
   .project-card p {
     position: relative;
-    font-size: 0.95rem;
-    color: var(--ink);
-    margin-bottom: 15px;
+    max-width: 95%;
+    color: var(--project-body);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin-bottom: 22px;
   }
 
   .project-card a {
     position: relative;
-    display: inline-block;
-    color: var(--scrap-red);
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--project-link-text);
+    background: var(--project-link-bg);
+    border: 1px solid rgba(255, 248, 239, 0.2);
+    border-radius: 999px;
+    padding: 10px 14px;
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s, transform 0.3s;
+    font-weight: 900;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
   }
 
   .project-card a:hover {
-    color: var(--scrap-brown);
-    transform: translateX(6px);
+    color: var(--ink);
+    background: var(--scrap-paper);
+    transform: translateX(5px);
+    box-shadow: 0 16px 34px rgba(255, 81, 174, 0.2);
+  }
+
+  .project-cursor {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 4;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    color: #7a1f2a;
+    background: #ffb3a5;
+    border: 2px solid rgba(75, 45, 36, 0.18);
+    border-radius: 50% 50% 46% 54%;
+    box-shadow: 0 16px 30px rgba(75, 45, 36, 0.16);
+    transform: rotate(-12deg);
+    animation: cursorTap 2.8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .project-card:hover .project-cursor,
+  .project-card:focus-within .project-cursor,
+  .project-card.is-picked .project-cursor {
+    animation-play-state: paused;
+    transform: translate(-8px, -10px) rotate(-18deg) scale(1.06);
+  }
+
+  @media (max-width: 900px) {
+    .projects-container {
+      grid-template-columns: 1fr;
+      width: min(100%, 410px);
+      gap: 46px;
+    }
+
+    .project-card,
+    .project-card:nth-child(2),
+    .project-card:nth-child(3) {
+      min-height: 286px;
+      margin-top: 0;
+    }
+
+    .project-file-face {
+      min-height: 268px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .projects-section {
+      padding: 62px 16px;
+    }
+
+    .projects-section h2 {
+      margin-bottom: 46px;
+    }
+
+    .project-file-face {
+      padding: 24px 20px 66px;
+    }
+
+    .project-card:hover,
+    .project-card:focus-within,
+    .project-card.is-picked {
+      --picked-lift: -14px;
+      --picked-scale: 1.025;
+    }
   }
 
   .certifications-section {
@@ -1238,15 +1467,17 @@ body[data-theme="dark"] .about-image img {
 
 body[data-theme="dark"] .projects-section {
     background:
-      linear-gradient(145deg, rgba(22, 16, 15, 0.96), rgba(37, 27, 24, 0.88)),
-      repeating-linear-gradient(90deg, transparent 0 42px, rgba(255, 154, 181, 0.05) 43px 44px);
+      radial-gradient(circle at 12% 18%, rgba(255, 154, 181, 0.11), transparent 18%),
+      radial-gradient(circle at 86% 24%, rgba(226, 185, 105, 0.12), transparent 16%),
+      linear-gradient(145deg, rgba(29, 21, 19, 0.96), rgba(47, 34, 29, 0.9)),
+      repeating-linear-gradient(0deg, rgba(255, 248, 239, 0.045) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(90deg, rgba(255, 248, 239, 0.035) 0 1px, transparent 1px 24px);
   }
 
 body[data-theme="dark"] .projects-section::after {
-    color: rgba(255, 154, 181, 0.12);
+    color: rgba(255, 154, 181, 0.1);
   }
 
-body[data-theme="dark"] .project-card,
 body[data-theme="dark"] .certification-item {
     background-color: rgba(38, 29, 26, 0.94);
     border-color: rgba(255, 248, 239, 0.16);
@@ -1254,14 +1485,49 @@ body[data-theme="dark"] .certification-item {
   }
 
 body[data-theme="dark"] .project-card {
-    background-image:
-      radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(255, 154, 181, 0.14), transparent 34%),
-      linear-gradient(transparent 0 31px, rgba(255, 248, 239, 0.055) 32px),
-      linear-gradient(90deg, rgba(226, 185, 105, 0.08) 0 1px, transparent 1px);
+    background: transparent;
+    box-shadow: none;
+  }
+
+body[data-theme="dark"] .project-card::before {
+    border-color: rgba(255, 248, 239, 0.13);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+  }
+
+body[data-theme="dark"] .project-file-face {
+    border-color: rgba(255, 248, 239, 0.16);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+  }
+
+body[data-theme="dark"] .project-card:nth-child(1) {
+    --file: #172a3d;
+    --tab: #9f2e2f;
+    --back-file: rgba(255, 248, 239, 0.12);
+    --project-title: #ff9fd2;
+  }
+
+body[data-theme="dark"] .project-card:nth-child(2) {
+    --file: #27342e;
+    --tab: #8b6843;
+    --back-file: rgba(255, 248, 239, 0.11);
+    --project-title: #e2b969;
+    --project-body: #ead7ca;
+  }
+
+body[data-theme="dark"] .project-card:nth-child(3) {
+    --file: #2f2624;
+    --tab: #26394b;
+    --back-file: rgba(226, 185, 105, 0.2);
+    --project-title: #ff9fd2;
+    --project-body: #ead7ca;
   }
 
 body[data-theme="dark"] .project-card p {
-    color: #ead7ca;
+    color: var(--project-body);
+  }
+
+body[data-theme="dark"] .project-file-face::before {
+    border-color: rgba(255, 248, 239, 0.1);
   }
 
 body[data-theme="dark"] .certifications-section {
@@ -1422,7 +1688,8 @@ body[data-theme="dark"] .contact-section textarea::placeholder {
 
 
     .project-card {
-        max-width: 90%; /* Allow project cards to take more width */
+        width: min(100%, 340px);
+        max-width: 100%;
     }
 
 
@@ -1512,6 +1779,10 @@ body[data-theme="dark"] .contact-section textarea::placeholder {
     transform: translate3d(0, 0, 0) rotate(var(--settled-rotate, 0deg)) scale(1);
   }
 
+.js .project-card[data-reveal].is-visible {
+    transform: translateY(var(--picked-lift, 0px)) rotate(var(--picked-rotate, var(--settled-rotate, 0deg))) scale(var(--picked-scale, 1));
+  }
+
 .about-image[data-reveal],
 .project-card:nth-child(2)[data-reveal],
 .certification-item:nth-child(even)[data-reveal] {
@@ -1540,15 +1811,15 @@ body[data-theme="dark"] .contact-section textarea::placeholder {
   }
 
 .project-card:nth-child(1)[data-reveal] {
-    --settled-rotate: -1.1deg;
+    --settled-rotate: -1.4deg;
   }
 
 .project-card:nth-child(2)[data-reveal] {
-    --settled-rotate: 0.8deg;
+    --settled-rotate: 1.2deg;
   }
 
 .project-card:nth-child(3)[data-reveal] {
-    --settled-rotate: -0.4deg;
+    --settled-rotate: -0.6deg;
   }
 
 .projects-container [data-reveal]:nth-child(2) {
@@ -1659,6 +1930,21 @@ body[data-theme="dark"] .contact-section textarea::placeholder {
     }
     50% {
       transform: translate3d(-50%, -62%, 100px) scale(1.08);
+    }
+  }
+
+@keyframes cursorTap {
+    0%, 100% {
+      transform: rotate(-12deg) translate(0, 0) scale(1);
+    }
+    42% {
+      transform: rotate(-15deg) translate(-5px, -6px) scale(1.04);
+    }
+    54% {
+      transform: rotate(-9deg) translate(2px, 2px) scale(0.94);
+    }
+    64% {
+      transform: rotate(-12deg) translate(0, 0) scale(1);
     }
   }
 
