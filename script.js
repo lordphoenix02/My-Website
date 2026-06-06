@@ -91,7 +91,7 @@ document.querySelectorAll('.project-card, .certification-item').forEach((card) =
     });
 });
 
-const mysteryShapes = document.querySelectorAll('.mystery-shape');
+const musicStickers = document.querySelectorAll('.music-polaroid');
 const mysteryMusic = document.querySelector('#mysteryMusic');
 let mysteryAudioContext;
 
@@ -136,18 +136,17 @@ function playFallbackMysteryTone(toneIndex) {
     });
 }
 
-async function playMysterySound(shape) {
-    const toneIndex = Number(shape.dataset.tone || 0);
+async function playMysterySound(sticker) {
+    const toneIndex = Number(sticker.dataset.tone || 0);
 
-    shape.classList.remove('is-active');
-    void shape.offsetWidth;
-    shape.classList.add('is-active');
-    document.body.classList.add('mystery-is-playing');
+    musicStickers.forEach((item) => item.classList.remove('is-open'));
+    sticker.classList.add('is-open');
+    document.body.classList.add('music-is-playing');
 
     window.setTimeout(() => {
-        shape.classList.remove('is-active');
-        document.body.classList.remove('mystery-is-playing');
-    }, 1100);
+        sticker.classList.remove('is-open');
+        document.body.classList.remove('music-is-playing');
+    }, 2600);
 
     if (mysteryMusic?.dataset.src) {
         mysteryMusic.src ||= mysteryMusic.dataset.src;
@@ -166,6 +165,6 @@ async function playMysterySound(shape) {
     playFallbackMysteryTone(toneIndex);
 }
 
-mysteryShapes.forEach((shape) => {
-    shape.addEventListener('click', () => playMysterySound(shape));
+musicStickers.forEach((sticker) => {
+    sticker.addEventListener('click', () => playMysterySound(sticker));
 });
