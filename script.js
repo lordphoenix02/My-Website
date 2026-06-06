@@ -134,22 +134,27 @@ function clearActiveMusicButtons() {
     photoMusicButtons.forEach((button) => updateMusicButton(button, false));
 }
 
-function ensureMysterySource() {
+function ensureMysterySource(source) {
     if (!mysteryMusic) {
         return false;
     }
 
-    const hasSourceElement = Boolean(mysteryMusic.querySelector('source'));
+    if (!source) {
+        return false;
+    }
 
-    if (!hasSourceElement && mysteryMusic.dataset.src && !mysteryMusic.getAttribute('src')) {
-        mysteryMusic.setAttribute('src', mysteryMusic.dataset.src);
+    const nextSource = new URL(source, window.location.href).href;
+
+    if (mysteryMusic.currentSrc !== nextSource && mysteryMusic.src !== nextSource) {
+        mysteryMusic.src = source;
+        mysteryMusic.load();
     }
 
     if (mysteryMusic.readyState === 0) {
         mysteryMusic.load();
     }
 
-    return Boolean(hasSourceElement || mysteryMusic.getAttribute('src'));
+    return true;
 }
 
 function playFallbackMysteryTone(toneIndex) {
@@ -195,6 +200,7 @@ function playFallbackMysteryTone(toneIndex) {
 
 async function toggleMysterySound(button) {
     const toneIndex = Number(button.dataset.tone || 0);
+    const audioSource = button.dataset.src;
     const isCurrentButtonPlaying = button.classList.contains('is-playing') && !mysteryMusic?.paused;
 
     if (isCurrentButtonPlaying) {
@@ -206,7 +212,7 @@ async function toggleMysterySound(button) {
     clearActiveMusicButtons();
     updateMusicButton(button, true);
 
-    if (ensureMysterySource()) {
+    if (ensureMysterySource(audioSource)) {
         mysteryMusic.volume = 0.46;
 
         if (!mysteryMusic.paused) {
