@@ -91,9 +91,45 @@ document.querySelectorAll('.project-card, .certification-item').forEach((card) =
     });
 });
 
-const musicStickers = document.querySelectorAll('.music-polaroid');
+const photoMusicButtons = document.querySelectorAll('.photo-music-toggle');
 const mysteryMusic = document.querySelector('#mysteryMusic');
 let mysteryAudioContext;
+
+function updateMusicButton(button, isPlaying) {
+    const icon = button.querySelector('i');
+    const label = button.dataset.playLabel || button.getAttribute('aria-label') || 'Play music';
+
+    button.dataset.playLabel ||= label;
+    button.classList.toggle('is-playing', isPlaying);
+    button.setAttribute('aria-pressed', isPlaying.toString());
+    button.setAttribute('aria-label', isPlaying ? 'Pause music' : button.dataset.playLabel);
+
+    if (icon) {
+        icon.className = `fa-solid ${isPlaying ? 'fa-pause' : 'fa-play'}`;
+    }
+}
+
+function clearActiveMusicButtons() {
+    photoMusicButtons.forEach((button) => updateMusicButton(button, false));
+}
+
+function ensureMysterySource() {
+    if (!mysteryMusic) {
+        return false;
+    }
+
+    const hasSourceElement = Boolean(mysteryMusic.querySelector('source'));
+
+    if (!hasSourceElement && mysteryMusic.dataset.src && !mysteryMusic.getAttribute('src')) {
+        mysteryMusic.setAttribute('src', mysteryMusic.dataset.src);
+    }
+
+    if (mysteryMusic.readyState === 0) {
+        mysteryMusic.load();
+    }
+
+    return Boolean(hasSourceElement || mysteryMusic.getAttribute('src'));
+}
 
 function playFallbackMysteryTone(toneIndex) {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -136,35 +172,44 @@ function playFallbackMysteryTone(toneIndex) {
     });
 }
 
-async function playMysterySound(sticker) {
-    const toneIndex = Number(sticker.dataset.tone || 0);
+async function toggleMysterySound(button) {
+    const toneIndex = Number(button.dataset.tone || 0);
+    const isCurrentButtonPlaying = button.classList.contains('is-playing') && !mysteryMusic?.paused;
 
-    musicStickers.forEach((item) => item.classList.remove('is-open'));
-    sticker.classList.add('is-open');
-    document.body.classList.add('music-is-playing');
+    if (isCurrentButtonPlaying) {
+        mysteryMusic.pause();
+        clearActiveMusicButtons();
+        return;
+    }
 
-    window.setTimeout(() => {
-        sticker.classList.remove('is-open');
-        document.body.classList.remove('music-is-playing');
-    }, 2600);
+    clearActiveMusicButtons();
+    updateMusicButton(button, true);
 
-    if (mysteryMusic?.dataset.src) {
-        mysteryMusic.src ||= mysteryMusic.dataset.src;
+    if (ensureMysterySource()) {
         mysteryMusic.volume = 0.46;
+
+        if (!mysteryMusic.paused) {
+            mysteryMusic.pause();
+        }
+
         mysteryMusic.currentTime = 0;
 
         try {
             await mysteryMusic.play();
             return;
         } catch {
+            updateMusicButton(button, false);
             playFallbackMysteryTone(toneIndex);
             return;
         }
     }
 
+    updateMusicButton(button, false);
     playFallbackMysteryTone(toneIndex);
 }
 
-musicStickers.forEach((sticker) => {
-    sticker.addEventListener('click', () => playMysterySound(sticker));
+photoMusicButtons.forEach((button) => {
+    button.addEventListener('click', () => toggleMysterySound(button));
 });
+
+mysteryMusic?.addEventListener('ended', clearActiveMusicButtons);
